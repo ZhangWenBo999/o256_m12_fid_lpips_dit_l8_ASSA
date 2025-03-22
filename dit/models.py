@@ -110,7 +110,7 @@ class DiTBlock(nn.Module):
     def __init__(self, hidden_size, num_heads, mlp_ratio=4.0, **block_kwargs):
         super().__init__()
         self.norm1 = nn.LayerNorm(hidden_size, elementwise_affine=False, eps=1e-6)
-        self.attn = Attention(hidden_size, num_heads=num_heads, qkv_bias=True, **block_kwargs)
+        # self.attn = Attention(hidden_size, num_heads=num_heads, qkv_bias=True, **block_kwargs)
         # self.attn = CAS(dim=hidden_size)
         # self.attn = CASWithHybridGate(dim=hidden_size)
         self.attn = WindowAttention_sparse(dim=hidden_size, win_size=(32, 32), num_heads=8)
